@@ -48,7 +48,7 @@
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/illustrations/family-photo.png" alt="全家福物件设定图" width="420"></td>
+    <td width="50%"><img src="docs/illustrations/family-photo.png" alt="童年林瑜与父母的全家福设定图" width="420"></td>
     <td width="50%"><img src="docs/illustrations/note.png" alt="字条物件设定图" width="420"></td>
   </tr>
   <tr>
