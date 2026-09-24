@@ -73,7 +73,7 @@
 
 ## 如何开始
 
-游戏没有构建步骤，不需要安装前端依赖。准备 Python 3 和浏览器即可启动本地静态服务器。
+游戏没有构建步骤，不需要安装前端依赖。准备 Python 3 和浏览器即可启动本地静态服务器：
 
 ```bash
 git clone https://github.com/langezhang/Return-To-2008.git
@@ -81,9 +81,7 @@ cd Return-To-2008
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-保持命令窗口运行，在浏览器中打开：
-
-[http://127.0.0.1:8000/game/](http://127.0.0.1:8000/game/)
+保持命令窗口运行，在浏览器中打开：[http://127.0.0.1:8000/game/](http://127.0.0.1:8000/game/)。
 
 Windows 上如果 `python` 命令不可用，可将最后一行改为：
 
@@ -122,7 +120,7 @@ py -m http.server 8000 --bind 127.0.0.1
 | 终章：回归与释怀 | 2026 年的卧室 | 将记忆带回当下 |
 
 <details>
-<summary>查看结局触发规则（包含剧透）</summary>
+<summary>查看结局触发规则</summary>
 
 结局依据本轮记忆收集数量选择文案，并沿用同一条主线章节顺序：
 
