@@ -26,8 +26,8 @@
 
 <table>
   <tr>
-    <td width="50%"><img src="game/images/characters/linyu_8.jpg" alt="8 岁林瑜的人物设定图" width="420"></td>
-    <td width="50%"><img src="game/images/characters/linyu_26.jpg" alt="26 岁林瑜的人物设定图" width="420"></td>
+    <td width="50%"><img src="docs/illustrations/linyu-child.png" alt="8 岁林瑜的人物设定图" width="420"></td>
+    <td width="50%"><img src="docs/illustrations/linyu-adult.png" alt="26 岁林瑜的人物设定图" width="420"></td>
   </tr>
   <tr>
     <td>2008 年，8 岁的林瑜</td>
@@ -48,8 +48,8 @@
 
 <table>
   <tr>
-    <td width="50%"><img src="game/images/cuts/photo.jpg" alt="全家福物件设定图" width="420"></td>
-    <td width="50%"><img src="game/images/cuts/note.jpg" alt="字条物件设定图" width="420"></td>
+    <td width="50%"><img src="docs/illustrations/family-photo.png" alt="全家福物件设定图" width="420"></td>
+    <td width="50%"><img src="docs/illustrations/note.png" alt="字条物件设定图" width="420"></td>
   </tr>
   <tr>
     <td>留在相框里的全家福</td>
@@ -166,6 +166,7 @@ Return-To-2008/
 ├── 音频/                   # 游戏引用的 WAV 文件
 └── docs/
     ├── screenshots/        # 实际运行截图
+    ├── illustrations/      # README 使用的设定图修复版
     ├── design/             # 剧本与人物设定，含剧情内容
     ├── 运行检查.md
     ├── 素材与整理说明.md
