@@ -1,0 +1,755 @@
+/* ==========================================
+   重返2008：梦境碎片 - 主样式表
+   ========================================== */
+
+/* === 全局重置 === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+    font-size: 20px;
+    cursor: default;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* === 游戏容器 === */
+#game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* === 场景背景图容器 === */
+#scene-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.scene-bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.scene-bg-layer.has-ai-bg {
+    background-repeat: no-repeat;
+    filter: saturate(0.92) contrast(1.06) sepia(0.08);
+}
+
+.scene-bg-layer.has-ai-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 25%, rgba(255,240,200,0.12) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.scene-bg-layer.active {
+    opacity: 1;
+}
+
+/* 背景上的梦核色调遮罩 */
+.scene-bg-layer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0) 30%,
+        rgba(0, 0, 0, 0) 55%,
+        rgba(0, 0, 0, 0.45) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* === 游戏画布 === */
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === 场景容器 === */
+#scene-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/* === 场景内容 === */
+.scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* === 场景热点交互（抠图轮廓发光） === */
+.hotspot-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+}
+
+.scene-hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+}
+
+.scene-hotspot.shape-ellipse {
+    border-radius: 50%;
+}
+
+.scene-hotspot.shape-rect {
+    border-radius: 6px;
+}
+
+.hotspot-glow {
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    box-shadow:
+        0 0 6px 2px rgba(255, 235, 160, 0.7),
+        0 0 20px 6px rgba(255, 210, 100, 0.45),
+        inset 0 0 16px rgba(255, 245, 200, 0.12);
+}
+
+.scene-hotspot:hover .hotspot-glow,
+.scene-hotspot.hotspot-active .hotspot-glow {
+    opacity: 1;
+}
+
+.scene-hotspot:hover,
+.scene-hotspot.hotspot-active {
+    border-color: rgba(255, 230, 150, 0.85);
+    box-shadow:
+        0 0 8px 3px rgba(255, 220, 100, 0.5),
+        0 0 28px 10px rgba(255, 200, 80, 0.3);
+    background: rgba(255, 230, 150, 0.05);
+}
+
+.scene-hotspot.hotspot-npc:hover {
+    border-color: rgba(255, 180, 120, 0.9);
+    box-shadow:
+        0 0 10px 4px rgba(255, 160, 80, 0.5),
+        0 0 30px 12px rgba(255, 140, 60, 0.25);
+}
+
+.scene-hotspot.hotspot-key {
+    animation: hotspot-key-pulse 2.8s ease-in-out infinite;
+}
+
+.scene-hotspot.hotspot-key .hotspot-glow {
+    opacity: 0.35;
+}
+
+.scene-hotspot.hotspot-visited {
+    border-color: rgba(255, 215, 0, 0.25);
+}
+
+.scene-hotspot.hotspot-memory {
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+.scene-hotspot.hotspot-memory .hotspot-glow {
+    opacity: 0.5;
+}
+
+.scene-hotspot.hotspot-exit:hover {
+    border-color: rgba(200, 255, 200, 0.7);
+    box-shadow: 0 0 20px 8px rgba(150, 255, 150, 0.25);
+}
+
+@keyframes hotspot-key-pulse {
+    0%, 100% { box-shadow: 0 0 6px 2px rgba(255, 220, 100, 0.25); }
+    50% { box-shadow: 0 0 16px 6px rgba(255, 220, 100, 0.55); }
+}
+
+/* 热点模式下隐藏旧图标交互 */
+.scene-hotspot-mode .interactable {
+    display: none !important;
+}
+
+/* === 可交互物品（旧版图标，已弃用） === */
+.interactable {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.interactable:hover {
+    transform: translate(-50%, -50%) scale(1.12);
+    z-index: 20;
+}
+
+.item-sprite-wrap {
+    width: 100%;
+    height: calc(100% - 28px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    transition: filter 0.3s ease;
+}
+
+.interactable:hover .item-sprite-wrap {
+    filter: drop-shadow(0 6px 20px rgba(255,215,0,0.4)) brightness(1.15);
+}
+
+.item-sprite-wrap svg {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.item-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.95);
+    margin-top: 4px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    background: rgba(0,0,0,0.65);
+    padding: 3px 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-family: 'VT323', 'SimSun', '宋体', monospace;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    transition: all 0.3s ease;
+}
+
+.item-label.visited {
+    background: rgba(255,215,0,0.2);
+    border-color: rgba(255,215,0,0.35);
+}
+
+.interactable.npc-character .item-label {
+    border-color: rgba(255,180,100,0.4);
+    background: rgba(80,40,20,0.7);
+}
+
+.npc-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #c44;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    animation: npc-pulse 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes npc-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 1; }
+}
+
+.interactable.key-item .item-sprite-wrap {
+    animation: key-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes key-glow {
+    0%, 100% { filter: drop-shadow(0 4px 12px rgba(255,215,0,0.3)); }
+    50% { filter: drop-shadow(0 6px 24px rgba(255,215,0,0.7)); }
+}
+
+.interactable.memory-found .item-label {
+    background: rgba(255,215,0,0.3);
+    border-color: rgba(255,215,0,0.6);
+}
+
+/* === 对话框 === */
+#dialog-box {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    max-width: 860px;
+    background: rgba(10, 8, 6, 0.92);
+    border: 2px solid rgba(255, 200, 100, 0.25);
+    border-radius: 6px;
+    padding: 0;
+    z-index: 100;
+    color: #e8e8e8;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255,255,255,0.05);
+    font-family: 'VT323', 'SimSun', '宋体', monospace;
+    display: flex;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#dialog-content {
+    flex: 1;
+    padding: 20px 28px 16px;
+}
+
+#dialog-speaker {
+    font-size: 18px;
+    color: #ffb840;
+    margin-bottom: 8px;
+    letter-spacing: 3px;
+    border-bottom: 1px solid rgba(255,184,64,0.2);
+    padding-bottom: 6px;
+}
+
+#dialog-text {
+    font-size: 22px;
+    line-height: 1.75;
+    letter-spacing: 1px;
+    min-height: 44px;
+    color: #f0ece4;
+}
+
+#dialog-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+#dialog-choices.hidden {
+    display: none !important;
+}
+
+.dialog-choice-btn {
+    background: rgba(255,184,64,0.08);
+    border: 1px solid rgba(255,184,64,0.35);
+    color: #ffd880;
+    padding: 10px 18px;
+    font-size: 18px;
+    font-family: 'VT323', 'SimSun', '宋体', monospace;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: left;
+    transition: all 0.25s ease;
+}
+
+.dialog-choice-btn:hover {
+    background: rgba(255,184,64,0.2);
+    border-color: rgba(255,184,64,0.7);
+    transform: translateX(4px);
+    box-shadow: 0 0 16px rgba(255,184,64,0.2);
+}
+
+#dialog-continue {
+    text-align: right;
+    font-size: 14px;
+    color: rgba(255, 200, 100, 0.45);
+    margin-top: 12px;
+    animation: blink 1.5s infinite;
+    letter-spacing: 2px;
+}
+
+/* === 内心独白 === */
+#inner-monologue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    max-width: 700px;
+    z-index: 90;
+    text-align: center;
+    pointer-events: none;
+}
+
+#monologue-text {
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+    font-size: 28px;
+    line-height: 2;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 0.8);
+    letter-spacing: 3px;
+    animation: typewriter-fade 3s ease-out;
+    white-space: pre-wrap;
+}
+
+@keyframes typewriter-fade {
+    0% { opacity: 0; transform: translateY(10px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* === 物品提示 === */
+#item-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 80;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+    letter-spacing: 1px;
+}
+
+/* === 提示系统 === */
+#hint-system {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 85;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffd700;
+    padding: 12px 28px;
+    border-radius: 4px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+/* === 标题画面 === */
+#title-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #1a0a0a 0%, #000000 70%);
+    overflow: hidden;
+}
+
+#title-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/bg_prologue.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.22;
+    filter: blur(2px) saturate(0.7) sepia(0.2);
+    z-index: 0;
+}
+
+.title-content {
+    text-align: center;
+    padding: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.game-title {
+    font-size: 96px;
+    color: #ffd700;
+    letter-spacing: 20px;
+    margin-bottom: 16px;
+    text-shadow: 0 0 40px rgba(255, 215, 0, 0.5), 0 0 80px rgba(255, 215, 0, 0.2);
+    animation: title-flicker 4s infinite;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+.game-subtitle {
+    font-size: 40px;
+    color: #c0c0c0;
+    letter-spacing: 24px;
+    margin-bottom: 50px;
+    font-weight: normal;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+.title-epigraph {
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 60px;
+    font-style: italic;
+    letter-spacing: 3px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+@keyframes title-flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    96% { opacity: 0.9; }
+    97% { opacity: 1; }
+}
+
+.glitch-btn {
+    padding: 18px 60px;
+    font-size: 24px;
+    background: transparent;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+    cursor: pointer;
+    letter-spacing: 8px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.glitch-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+    transform: scale(1.05);
+}
+
+.title-hint {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: 40px;
+    letter-spacing: 3px;
+    animation: blink 2s infinite;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+.title-year {
+    font-size: 20px;
+    color: rgba(255, 215, 0, 0.5);
+    letter-spacing: 10px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+.title-instruction {
+    margin-top: 50px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 2.2;
+    letter-spacing: 2px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+/* === 章节标题 === */
+#chapter-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 150;
+    text-align: center;
+    pointer-events: none;
+}
+
+#chapter-name {
+    font-size: 56px;
+    color: #ffd700;
+    letter-spacing: 16px;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    margin-bottom: 16px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+#chapter-subtitle {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 6px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+/* === 结局画面 === */
+#ending-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #000000 70%);
+}
+
+.ending-content {
+    text-align: center;
+    padding: 40px;
+    max-width: 700px;
+}
+
+#ending-title {
+    font-size: 48px;
+    color: #ffd700;
+    letter-spacing: 10px;
+    margin-bottom: 40px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+#ending-text {
+    font-size: 22px;
+    color: #c0c0c0;
+    line-height: 2;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+/* === 记忆碎片收集 === */
+#memory-collection {
+    position: absolute;
+    top: 24px;
+    right: 30px;
+    z-index: 80;
+    color: #ffd700;
+    text-align: right;
+}
+
+#memory-count {
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+#memory-name {
+    font-size: 16px;
+    color: rgba(255, 215, 0, 0.7);
+    letter-spacing: 2px;
+    font-family: 'VT323', 'Courier New', 'SimSun', '宋体', monospace;
+}
+
+#dialog-portrait {
+    width: 72px;
+    min-width: 72px;
+    background: rgba(255,184,64,0.06);
+    border-right: 1px solid rgba(255,184,64,0.15);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+#dialog-portrait.visible {
+    display: flex;
+}
+
+#dialog-portrait svg {
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+/* === 配音开关 === */
+.voice-toggle-btn {
+    position: absolute;
+    top: 24px;
+    left: 30px;
+    z-index: 85;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: 'VT323', 'SimSun', '宋体', monospace;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.voice-toggle-btn:hover {
+    background: rgba(255, 215, 0, 0.12);
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.25);
+}
+
+.voice-toggle-btn.voice-off {
+    color: rgba(255, 255, 255, 0.45);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.state-title .voice-toggle-btn {
+    display: none;
+}
+
+/* === 通用隐藏 === */
+.hidden {
+    display: none !important;
+}
+
+/* === 响应式 === */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 52px;
+        letter-spacing: 10px;
+    }
+    .game-subtitle {
+        font-size: 24px;
+        letter-spacing: 12px;
+    }
+    #dialog-box {
+        width: 92%;
+        padding: 18px 20px;
+    }
+    #dialog-text {
+        font-size: 20px;
+    }
+    #monologue-text {
+        font-size: 22px;
+    }
+    .title-instruction {
+        font-size: 14px;
+    }
+}

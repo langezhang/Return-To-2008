@@ -1,0 +1,311 @@
+/* ==========================================
+   重返2008：梦境碎片 - 梦核视觉特效
+   ========================================== */
+
+/* === 梦核叠加层 === */
+#dreamcore-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+    /* 过曝阳光效果 */
+    background: radial-gradient(
+        ellipse at 60% 30%,
+        rgba(255, 240, 200, 0.15) 0%,
+        rgba(255, 200, 150, 0.05) 30%,
+        rgba(0, 0, 0, 0.1) 70%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+    mix-blend-mode: overlay;
+}
+
+/* === 故障艺术层 === */
+#glitch-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 49;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+
+#glitch-layer.active {
+    opacity: 1;
+    animation: glitch-effect 0.3s ease-out;
+}
+
+@keyframes glitch-effect {
+    0% {
+        background: rgba(255, 0, 100, 0.1);
+        transform: translate(5px, 0);
+    }
+    20% {
+        background: rgba(0, 255, 255, 0.1);
+        transform: translate(-5px, 2px);
+    }
+    40% {
+        background: transparent;
+        transform: translate(3px, -2px);
+    }
+    60% {
+        background: rgba(255, 0, 100, 0.05);
+        transform: translate(-3px, 1px);
+    }
+    80% {
+        background: transparent;
+        transform: translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 色散效果 */
+.chromatic-aberration {
+    position: relative;
+}
+
+.chromatic-aberration::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    mix-blend-mode: screen;
+    filter: hue-rotate(300deg);
+    opacity: 0.15;
+    animation: chroma-shift 0.1s infinite;
+}
+
+.chromatic-aberration::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    mix-blend-mode: screen;
+    filter: hue-rotate(180deg);
+    opacity: 0.15;
+    animation: chroma-shift-reverse 0.1s infinite;
+}
+
+@keyframes chroma-shift {
+    0%, 100% { transform: translate(-2px, 0); }
+    50% { transform: translate(2px, 0); }
+}
+
+@keyframes chroma-shift-reverse {
+    0%, 100% { transform: translate(2px, 0); }
+    50% { transform: translate(-2px, 0); }
+}
+
+/* === 雪花屏噪点 === */
+#static-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 48;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    animation: noise-shift 0.5s steps(5) infinite;
+}
+
+#static-noise.intense {
+    opacity: 0.15;
+    animation: noise-shift 0.1s steps(3) infinite;
+}
+
+@keyframes noise-shift {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-5%, -5%); }
+    50% { transform: translate(5%, 5%); }
+    75% { transform: translate(-5%, 5%); }
+    100% { transform: translate(5%, -5%); }
+}
+
+/* === 扫描线 === */
+#scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 47;
+    pointer-events: none;
+    opacity: 0.08;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.3) 2px,
+        rgba(0, 0, 0, 0.3) 4px
+    );
+}
+
+/* === 暗角 === */
+#vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 46;
+    pointer-events: none;
+    box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.6);
+}
+
+/* === VHS滤镜 - 场景应用 === */
+.vhs-effect {
+    position: relative;
+}
+
+.vhs-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    /* VHS色彩偏移 */
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.03) 0%,
+        rgba(0, 255, 0, 0.03) 33%,
+        rgba(0, 0, 255, 0.03) 66%,
+        rgba(255, 0, 0, 0.03) 100%
+    );
+}
+
+/* VHS底部追踪线 */
+.vhs-effect::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 5;
+    pointer-events: none;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 20%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.1) 80%,
+        transparent 100%
+    );
+    animation: vhs-track 2s ease-in-out infinite;
+}
+
+@keyframes vhs-track {
+    0%, 100% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(2px); opacity: 0.6; }
+}
+
+/* === 低保真像素化效果 === */
+.pixelated {
+    image-rendering: pixelated;
+}
+
+/* === 闪烁画面效果 === */
+.screen-flicker {
+    animation: screen-flicker 0.15s ease-in-out;
+}
+
+@keyframes screen-flicker {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.5) saturate(2); }
+    100% { filter: brightness(1); }
+}
+
+/* === 扭曲效果 === */
+.warp-effect {
+    animation: warp 0.5s ease-in-out;
+}
+
+@keyframes warp {
+    0% { transform: scale(1); filter: blur(0); }
+    50% { transform: scale(1.02); filter: blur(2px) hue-rotate(30deg); }
+    100% { transform: scale(1); filter: blur(0); }
+}
+
+/* === 老电视关机效果 === */
+.tv-power-off {
+    animation: tv-off 0.8s ease-in forwards;
+}
+
+@keyframes tv-off {
+    0% { transform: scale(1); filter: brightness(1); }
+    30% { transform: scale(1.05); filter: brightness(2); }
+    100% { transform: scale(0); filter: brightness(0); }
+}
+
+/* === 记忆闪回动画 === */
+.memory-flash {
+    animation: memory-flash 0.8s ease-out;
+}
+
+@keyframes memory-flash {
+    0% { filter: brightness(3) blur(5px); }
+    50% { filter: brightness(1.5) blur(2px); }
+    100% { filter: brightness(1) blur(0); }
+}
+
+/* === 波纹效果（水面/镜子） === */
+.ripple-effect {
+    animation: ripple 2s ease-out;
+}
+
+@keyframes ripple {
+    0% { filter: blur(5px) brightness(0.5); }
+    100% { filter: blur(0) brightness(1); }
+}
+
+/* === 眩晕/加速旋转效果 === */
+.spin-accelerate {
+    animation: spin-accelerate 3s ease-in forwards;
+}
+
+@keyframes spin-accelerate {
+    0% { transform: rotate(0deg) scale(1); filter: blur(0); }
+    50% { transform: rotate(10deg) scale(1.1); filter: blur(1px); }
+    100% { transform: rotate(720deg) scale(0); filter: blur(10px); }
+}
+
+/* === 颜色偏移（橙黄色调） === */
+.warm-shift {
+    filter: sepia(0.3) saturate(1.2) brightness(1.1);
+}
+
+/* === 冷色调 === */
+.cool-shift {
+    filter: saturate(0.7) brightness(0.9) hue-rotate(-10deg);
+}
+
+/* === 过渡转场效果 === */
+.transition-fade {
+    animation: transition-fade 1.5s ease-in-out;
+}
+
+@keyframes transition-fade {
+    0% { opacity: 0; filter: blur(10px); }
+    30% { opacity: 1; filter: blur(0); }
+    70% { opacity: 1; }
+    100% { opacity: 0; filter: blur(5px); }
+}

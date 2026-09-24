@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重返2008：梦境碎片 — 林瑜的夏天</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dreamcore.css">
+    <link rel="stylesheet" href="css/scene-art.css">
+</head>
+<body>
+    <!-- 主游戏容器 -->
+    <div id="game-container">
+        <!-- 梦核滤镜层 -->
+        <div id="dreamcore-overlay"></div>
+        <!-- 故障特效层 -->
+        <div id="glitch-layer"></div>
+        <!-- 雪花屏层 -->
+        <div id="static-noise"></div>
+        <!-- 扫描线 -->
+        <div id="scanlines"></div>
+        <!-- 暗角 -->
+        <div id="vignette"></div>
+
+        <!-- 游戏画布 -->
+        <div id="game-canvas">
+            <!-- 场景背景图容器（双图层实现交叉淡入淡出） -->
+            <div id="scene-bg-container">
+                <div class="scene-bg-layer" id="bg-layer-a"></div>
+                <div class="scene-bg-layer" id="bg-layer-b"></div>
+            </div>
+            <!-- 场景容器 -->
+            <div id="scene-container"></div>
+            
+            <!-- 对话框 -->
+            <div id="dialog-box" class="hidden">
+                <div id="dialog-portrait"></div>
+                <div id="dialog-content">
+                    <div id="dialog-speaker"></div>
+                    <div id="dialog-text"></div>
+                    <div id="dialog-choices" class="hidden"></div>
+                    <div id="dialog-continue">点击继续 ▶</div>
+                </div>
+            </div>
+
+            <!-- 内心独白 -->
+            <div id="inner-monologue" class="hidden">
+                <div id="monologue-text"></div>
+            </div>
+
+            <!-- 物品信息提示 -->
+            <div id="item-tooltip" class="hidden">
+                <div id="tooltip-text"></div>
+            </div>
+
+            <!-- 提示系统 -->
+            <div id="hint-system" class="hidden">
+                <div id="hint-text"></div>
+            </div>
+
+            <!-- 标题画面 -->
+            <div id="title-screen">
+                <div class="title-content">
+                    <div class="title-year">千禧梦核 · 文化表达</div>
+                    <h1 class="game-title">重返2008</h1>
+                    <h2 class="game-subtitle">林瑜的夏天</h2>
+                    <div class="title-epigraph">"你可以回到过去，但那里已经没有人了。"</div>
+                    <button id="start-btn" class="glitch-btn">开 始 游 戏</button>
+                    <div class="title-hint">点击开始，进入梦境...</div>
+                    <div class="title-instruction">
+                        <p>🖱️ 鼠标移到场景物品上，轮廓会发光</p>
+                        <p>👆 点击发光的物品/NPC 触发对话</p>
+                        <p>🔊 NPC 对话自带中文配音（可点击左上角开关）</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 场景标题 -->
+            <div id="chapter-title" class="hidden">
+                <div id="chapter-name"></div>
+                <div id="chapter-subtitle"></div>
+            </div>
+
+            <!-- 结局画面 -->
+            <div id="ending-screen" class="hidden">
+                <div class="ending-content">
+                    <h2 id="ending-title"></h2>
+                    <p id="ending-text"></p>
+                    <button id="restart-btn" class="glitch-btn">再 次 入 梦</button>
+                </div>
+            </div>
+
+            <!-- 记忆碎片收集提示 -->
+            <div id="memory-collection" class="hidden">
+                <div id="memory-count">记忆碎片: 0/8</div>
+                <div id="memory-name"></div>
+            </div>
+
+            <!-- 配音开关 -->
+            <button id="voice-toggle" class="voice-toggle-btn" title="切换NPC配音">🔊 配音开</button>
+        </div>
+    </div>
+
+    <!-- 音频元素 -->
+    <audio id="bgm" loop preload="auto"></audio>
+    <audio id="sfx" preload="auto"></audio>
+
+    <!-- 游戏脚本 -->
+    <script src="js/config.js"></script>
+    <script src="js/hotspots.js"></script>
+    <script src="js/scene-art.js"></script>
+    <script src="js/item-art.js"></script>
+    <script src="js/dialogues.js"></script>
+    <script src="js/dialogue-system.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/voice-system.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/scenes.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

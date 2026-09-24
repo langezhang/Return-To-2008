@@ -1,0 +1,178 @@
+[
+  {
+    "path": "game/index.html",
+    "sha256": "243a08662883f0a5dad0b13c4bf746a146b2cb4671a33122e8a5e5350425459d"
+  },
+  {
+    "path": "game/css/dreamcore.css",
+    "sha256": "3b73d8567ba350ca1eceaa02b133584582536e89f2120cf8954549929a318da3"
+  },
+  {
+    "path": "game/css/scene-art.css",
+    "sha256": "9987e46cea0f35ff0bcf8e8177d87a9939c7a3922a1ea9f9c7b87691b154e164"
+  },
+  {
+    "path": "game/css/style.css",
+    "sha256": "d72e23ed29e9709012b282b6bc6f6aabb3e703296484ccb4f17a44703ed64ef2"
+  },
+  {
+    "path": "game/images/bg_chapter1.jpg",
+    "sha256": "bd80828b7b831fe78d1530e8695620304eef71d69d6103eebb2a0a541bc47af2"
+  },
+  {
+    "path": "game/images/bg_chapter2.jpg",
+    "sha256": "ef858f757c50f54d8cee8983b234854e27141aefffe095555d7d258d0672150d"
+  },
+  {
+    "path": "game/images/bg_chapter3.jpg",
+    "sha256": "597db9cdb473ff56e58ae453bfdda69cb32587ffb843b092a73aba184491ad93"
+  },
+  {
+    "path": "game/images/bg_epilogue.jpg",
+    "sha256": "d15fa64c821cef61dd05e0af655d22be195a2029fc4cfef68c7ee2c7b38f39ac"
+  },
+  {
+    "path": "game/images/bg_prologue.jpg",
+    "sha256": "4a5d4ae68f713b6126cc9235a7c9ce071f81039249db7b5781f872be8997de5e"
+  },
+  {
+    "path": "game/js/audio.js",
+    "sha256": "bc6aecff265ea7c172638b27874bc8743e8cf335b9a618e87ca8c90dd92c2387"
+  },
+  {
+    "path": "game/js/config.js",
+    "sha256": "ac091a177859c1f5d5e2b16f1965b43216ba50b52dbb637ec088fe950a8fb9f9"
+  },
+  {
+    "path": "game/js/dialogue-system.js",
+    "sha256": "378b689202d017eb403c09bad83fc88b548502de9f88404bdb41898d422db499"
+  },
+  {
+    "path": "game/js/dialogues.js",
+    "sha256": "7537575085231994a28ffe17671b06241f4d06a9e9a1b389273bb7d63273d266"
+  },
+  {
+    "path": "game/js/effects.js",
+    "sha256": "f1e98d2caa9ad5b3399bee33c821a6b441f6c938908173a15774dcfc862d7a99"
+  },
+  {
+    "path": "game/js/game.js",
+    "sha256": "ad9654fe562353720f73e128baf886a1eeaadb7d287cd6be9123dcc7ad9ba8ea"
+  },
+  {
+    "path": "game/js/hotspots.js",
+    "sha256": "04fffb2df5a26f1aeaf31f98124a4144c1f782464c2193af57c2a616268ec594"
+  },
+  {
+    "path": "game/js/item-art.js",
+    "sha256": "2e8e7cc788595cf6d88b8ceb65cb414bebadf9a7c3a16644135632c330337b3d"
+  },
+  {
+    "path": "game/js/scene-art.js",
+    "sha256": "ce95187d9bcc2bac1bc3e58c3942bec0d1ebc26a73981ff16da2132815c43330"
+  },
+  {
+    "path": "game/js/scenes.js",
+    "sha256": "589fc366a3d877b0d7ded6fea3d2e473826d6fcdfe5286310ff362e75bbdc2c7"
+  },
+  {
+    "path": "game/js/voice-system.js",
+    "sha256": "a05e0a39e2f3bb9e55869fe634f33aaba3163e1c1a3d1315dd775f01d20cd0b9"
+  },
+  {
+    "path": "game/images/characters/linyu_26.jpg",
+    "sha256": "23a47a2df42f5826538bc56945ba96553cd0a6737b0d3bf51906fa69a637c160"
+  },
+  {
+    "path": "game/images/characters/linyu_8.jpg",
+    "sha256": "0618a78f2496598fcfbb97e247d2c779781c1ca120756644a4c681d9d75cc627"
+  },
+  {
+    "path": "game/images/characters/mysterious_boy.jpg",
+    "sha256": "dd4f8d18053a41ea6acdc5a0e37f44e28aaa26cf10e1f61843f354ca8e138630"
+  },
+  {
+    "path": "game/images/characters/npc_1.jpg",
+    "sha256": "23a47a2df42f5826538bc56945ba96553cd0a6737b0d3bf51906fa69a637c160"
+  },
+  {
+    "path": "game/images/characters/npc_2.jpg",
+    "sha256": "175805d975806bb3a1fe5fa57b8f33176937c5cd07304c45c05578be49a471cd"
+  },
+  {
+    "path": "game/images/characters/npc_3.jpg",
+    "sha256": "0618a78f2496598fcfbb97e247d2c779781c1ca120756644a4c681d9d75cc627"
+  },
+  {
+    "path": "game/images/characters/npc_4.jpg",
+    "sha256": "dd4f8d18053a41ea6acdc5a0e37f44e28aaa26cf10e1f61843f354ca8e138630"
+  },
+  {
+    "path": "game/images/cuts/fan.jpg",
+    "sha256": "94b22ab64d925d5fa84fd7d6267a0ea001969adeba6e89d087e7a87cfc2cd617"
+  },
+  {
+    "path": "game/images/cuts/homework.jpg",
+    "sha256": "a6ab2063bed59f75c552ab6e044eefbd2fda24d77d9a766bd8f11e939bfb0bb8"
+  },
+  {
+    "path": "game/images/cuts/marble.jpg",
+    "sha256": "0aea448bb70456876bfaf869589051b0d821b91940521441ee4a5eb317a9ec39"
+  },
+  {
+    "path": "game/images/cuts/note.jpg",
+    "sha256": "54e1a876e18880124867335a1457f72d6e0afd2d280a87ecc762095a65e97e18"
+  },
+  {
+    "path": "game/images/cuts/phone.jpg",
+    "sha256": "e81afa7f59702e5d383e6a5562b56561c0f3f2a63e4c486ccb53f9976ef2bbcc"
+  },
+  {
+    "path": "game/images/cuts/photo.jpg",
+    "sha256": "1a7b85e261fd2daab977307c81deca8baf3ff15eeb3fb1a9465809cfd24db01d"
+  },
+  {
+    "path": "game/images/cuts/tv.jpg",
+    "sha256": "9a142a23d188811a0bf08f33407b38d0a5b005dcd56081919efc8f9214bfb942"
+  },
+  {
+    "path": "音频/ambient_children_far.wav",
+    "sha256": "8ab649df26ab8f27379f676230cb12aa05812cbd89b6e06ea68b369daaa12eb4"
+  },
+  {
+    "path": "音频/ambient_cicada.wav",
+    "sha256": "5de3fe9788b8f99586d96c98cc1d35ac30007a14698982628aa10a25ad7829c1"
+  },
+  {
+    "path": "音频/ambient_fridge_hum.wav",
+    "sha256": "cd35bef29cc258f4e5915a002211faeed5f4e8768832ca3cad819cd8a415ed3f"
+  },
+  {
+    "path": "音频/ambient_news_intro.wav",
+    "sha256": "513748d82ad58d0699a8515916f4a8f0b615c832ac1d02c79ac0ecf9d09385bb"
+  },
+  {
+    "path": "音频/bgm_beijing_lofi.wav",
+    "sha256": "ff29a380e9376e14a016ef1206f1cfdb5075c847c2b45ff0da1bc1ce1ad41cc0"
+  },
+  {
+    "path": "音频/bgm_music_box.wav",
+    "sha256": "ea34255febc05b4cdb44d8f5bc3de90758d1bcb673372db36e2f2d4055b48358"
+  },
+  {
+    "path": "音频/sfx_nokia_ringtone.wav",
+    "sha256": "e217593e75981cf5a72f371005be011ad3fb70851be3154de2e83b741a604e15"
+  },
+  {
+    "path": "音频/sfx_page_flip.wav",
+    "sha256": "1c9b9257bbebb1fbffdebca665c5cef12989c5b16c7db11d413d7177df004104"
+  },
+  {
+    "path": "音频/sfx_qq_cough.wav",
+    "sha256": "6ada834d64d424cac5a55b2e1f6a946912e2429c39ed85512311ddcee8086b76"
+  },
+  {
+    "path": "音频/sfx_xp_shutdown.wav",
+    "sha256": "59796a1f4ab876239d000001e39a38cabf547136c3f009e4376d40a7451a17e8"
+  }
+]

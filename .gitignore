@@ -1,0 +1,23 @@
+# 本地环境与工具配置
+node_modules/
+.venv/
+venv/
+.codebuddy/
+.cursor/
+.vercel/
+.netlify/
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+
+# 临时输出
+__pycache__/
+*.py[cod]
+*.log
+tmp/
+temp/
+.DS_Store
+Thumbs.db
+desktop.ini
